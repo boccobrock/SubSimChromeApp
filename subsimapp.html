@@ -1,0 +1,29 @@
+<html ng-app="subsimapp">
+  <head>
+    <title>Sub Sim App</title>
+    <link rel="stylesheet" href="subsimapp.css" type="text/css">
+  </head>
+  <body ng-controller="subsimcontroller">
+    <div>
+	  <span ng-show="state == 'toconnect'">
+        <input type="text" ng-model="host"/>
+        <input type="text" ng-model="port"/>
+        <input type="button" ng-click="connect()" value="Connect" />
+	  </span>
+	  <span ng-show="state == 'tojoin'">
+        <input type="text" ng-model="name"/>
+        <input type="button" ng-click="join()" value="Join" />
+	  </span>
+	  <span ng-show="state == 'waitstart'">Waiting To Start</span>
+	  <span ng-show="state == 'playing'"><strong>Turn {{turn}}</strong> {{sub}}</span>
+	  <br>
+	  <div class="map">
+	    <div ng-repeat="row in map track by $index" class="row" style="height: {{(1/map.length)*100}}%">
+		  <span ng-repeat="square in row track by $index" class="square {{square}}" style="width: {{(1/row.length)*100}}%"></span>
+		</div>
+	  </div>
+    </div>
+    <script src="angular.min.js"></script>
+    <script src="subsimapp.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+.map {
+  width: 600px;
+  height: 600px;
+}
+
+.square {
+  display: inline-block;
+  height: 100%;
+  border: solid 1px #fff;
+  margin: -1px;
+}
+
+.blank {
+  background-color: #7FDBFF;
+}
