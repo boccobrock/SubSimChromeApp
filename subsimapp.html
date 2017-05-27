@@ -19,7 +19,8 @@
 	  <br>
 	  <div class="map">
 	    <div ng-repeat="row in map track by $index" class="row" style="height: {{(1/map.length)*100}}%">
-		  <span ng-repeat="square in row track by $index" class="square {{square}}" style="width: {{(1/row.length)*100}}%"></span>
+		  <span ng-repeat="square in row track by $index" class="square {{square}}" ng-click="selection($parent.$index, $index)"
+		  style="width: {{(1/row.length)*100}}%"></span>
 		</div>
 	  </div>
     </div>

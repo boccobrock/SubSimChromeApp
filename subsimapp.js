@@ -6,8 +6,10 @@ subsimapp.controller('subsimcontroller', ['$scope', function($scope) {
   $scope.port = 9555;
   $scope.name = "tester";
   $scope.turn = "";
-  $scope.sub = "";
   $scope.map = [];
+  $scope.sub = {};
+  $scope.sub.y = 1;
+  $scope.sub.x = 1;
   
   $scope.asciiToBuf = function(message) {
     var asciiKeys = [];
@@ -64,11 +66,12 @@ subsimapp.controller('subsimcontroller', ['$scope', function($scope) {
       $scope.state = "tojoin";
       $scope.title = command[2];
       $scope.map = maparr;
+	  $scope.map[$scope.sub.y-1][$scope.sub.x-1] = "selection"
     });
   };
   
   $scope.join = function() {
-    $scope.sendMessage("J|" + $scope.name + "|1|1");
+    $scope.sendMessage("J|" + $scope.name + "|" + $scope.sub.x + "|" + $scope.sub.y);
   };
   
   $scope.readInfo = function(command) {
@@ -88,5 +91,17 @@ subsimapp.controller('subsimcontroller', ['$scope', function($scope) {
       $scope.state = "playing";
       $scope.turn = command[1];
     });
-  };  
+  };
+  
+  $scope.selection = function(y, x) {
+	  if($scope.state == "tojoin") {
+	    $scope.map[$scope.sub.y-1][$scope.sub.x-1] = "blank"
+	    $scope.sub.y = y + 1;
+	    $scope.sub.x = x + 1;
+	    $scope.map[$scope.sub.y-1][$scope.sub.x-1] = "selection"
+	  }
+	  else if($scope.state == "playing") {
+		  
+	  }
+  };
 }]);
